@@ -8,6 +8,7 @@ RUN apt-get update && \
             locales \
             curl \
             rsyslog \
+            logrotate \
             systemd \
             passwd \
             net-tools \
@@ -48,6 +49,6 @@ RUN mkdir -p /var/run/sshd &&\
     sed -i -e '/$ModLoad imjournal/s/^/#/' /etc/rsyslog.conf &&\
     sed -i -e 's/$OmitLocalLogging on/$OmitLocalLogging off/' /etc/rsyslog.conf &&\
     sed -i -e '/$IMJournalStateFile/s/^/#/' /etc/rsyslog.conf &&\
-    systemctl enable nginx rsyslog
+    systemctl enable nginx rsyslog logrotate
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
